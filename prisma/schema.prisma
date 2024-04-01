@@ -9,3 +9,69 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Admin {
+  id        Int    @id
+  email     String?
+  password  String?
+  lastName  String?
+  firstName String?
+}
+
+model ArticleOrder {
+  id            Int    @id
+  orderId       Int?
+  productId     Int?
+  quantity      Int?
+  price         Int?
+  order         Order?   @relation(fields: [orderId], references: [id])
+  product       Product? @relation(fields: [productId], references: [id])
+}
+
+model Category {
+  id       Int      @id
+  label    String?  
+  products Product[]
+}
+
+model Client {
+  id        Int    @id
+  email     String?
+  password  String?
+  address   String?
+  city      String?
+  createdAt DateTime?
+  lastName  String?
+  firstName String?
+  orders    Order[]
+}
+
+model Order {
+  id           Int            @id
+  clientId     Int?
+  status       String?
+  createdAt    DateTime?
+  orderDate    DateTime?
+  client       Client?         @relation(fields: [clientId], references: [id])
+  ArticleOrder ArticleOrder[]
+}
+
+model Material {
+  id       Int      @id
+  label    String?
+  products Product[]
+}
+
+model Product {
+  id          Int           @id
+  name        String?
+  price       Int?
+  stock       Int?
+  description String?
+  image       String?
+  categoryId  Int?
+  materialId  Int?
+  Category    Category?      @relation(fields: [categoryId], references: [id])
+  Material    Material?      @relation(fields: [materialId], references: [id])
+  ArticleOrder ArticleOrder[]
+}
