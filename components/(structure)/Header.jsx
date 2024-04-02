@@ -16,23 +16,35 @@ const Header = () => {
         <span className="text-primary font-bold select-none">Arneis</span>
         <nav>
           <ul className="flex justify-between items-center text-sm font-medium">
-            <li className="mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer">
-              <Link href="/" className="text-primary">
+            <li>
+              <Link
+                href="/"
+                className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
+              >
                 Accueil
               </Link>
             </li>
-            <li className="mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer">
-              <a href="#" className="text-primary">
+            <li>
+              <Link
+                href="/products"
+                className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
+              >
                 Produits
-              </a>
+              </Link>
             </li>
-            <li className="mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer">
-              <a href="#" className="text-primary">
+            <li>
+              <a
+                href="#"
+                className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
+              >
                 Catégories
               </a>
             </li>
-            <li className="mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer">
-              <a href="#" className="text-primary">
+            <li className="">
+              <a
+                href="#"
+                className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
+              >
                 Contact
               </a>
             </li>

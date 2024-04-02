@@ -38,7 +38,7 @@ export default function Home() {
         {/* Caroussel container */}
 
         <div className="flex">
-          <div className="flex xl:h-[32rem] h-[28rem] xl:w-96 w-72 bg-red-200 rounded-t-full rounded-b-[80rem] shadow-[0px_10px_20px_0px_rgba(0,0,0,0.2)] carousel">
+          <div className="flex xl:h-[32rem] h-[28rem] xl:w-96 w-72 rounded-t-full rounded-b-[80rem] shadow-[0px_10px_20px_0px_rgba(0,0,0,0.2)] carousel">
             <div className="carousel-item w-full">
               <img
                 src="https://cdn.pixabay.com/photo/2017/03/19/01/18/living-room-2155353_1280.jpg"
