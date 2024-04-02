@@ -1,6 +1,11 @@
+import Footer from "@/components/(structure)/Footer";
+import Header from "@/components/(structure)/Header";
+
 export default function Home() {
   return (
     <>
+      <Header />
+
       {/* Main hero section */}
 
       <section className="w-full h-96 flex items-center px-20 my-40 md:space-x-20 flex-col md:flex-row md:text-left text-center space-y-16 xl:px-80">
@@ -120,6 +125,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   );
 }
