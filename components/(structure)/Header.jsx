@@ -1,13 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [theme, setTheme] = useState(
+    localStorage && localStorage.getItem("theme")
+      ? localStorage.getItem("theme")
+      : "lightMode"
+  );
 
-  const toggleCheck = () => {
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
+  const toggleCheck = (e) => {
     setIsChecked(!isChecked);
+    if (isChecked) {
+      setTheme("lightMode");
+    } else {
+      setTheme("darkMode");
+    }
   };
 
   return (
