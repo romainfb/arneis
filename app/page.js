@@ -108,17 +108,17 @@ export default function Home() {
           </p>
           <div className="flex w-full h-fit mt-20 space-x-10">
             <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer">
-              <p className="text-white text-2xl flex items-end h-full font-medium">
+              <p className="text-secondary text-2xl flex items-end h-full font-medium">
                 Nos bois de chêne
               </p>
             </div>
             <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer">
-              <p className="text-white text-2xl flex items-end h-full font-medium">
+              <p className="text-secondary text-2xl flex items-end h-full font-medium">
                 Nos bois de bouleau
               </p>
             </div>
             <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer ">
-              <p className="text-white text-2xl flex items-end h-full font-medium">
+              <p className="text-secondary text-2xl flex items-end h-full font-medium">
                 Nos bois de hêtre
               </p>
             </div>
