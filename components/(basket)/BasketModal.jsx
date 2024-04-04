@@ -29,7 +29,7 @@ const BasketModal = () => {
   return (
     <section className="pt-24 pb-16 relative">
       <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-        <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-primary">
+        <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
           Panier
         </h2>
 
@@ -134,7 +134,7 @@ const BasketModal = () => {
                     </svg>
                   </button>
                 </div>
-                <h6 className="text-primary font-manrope font-bold text-2xl leading-9 text-right">
+                <h6 className="text-primary font-bold text-2xl leading-9 text-right">
                   {getCartProductPrice(item.id)}€
                 </h6>
               </div>
@@ -147,12 +147,12 @@ const BasketModal = () => {
         {cart.length > 0 ? (
           <>
             <div className="flex flex-col md:flex-row items-center md:items-center justify-between lg:px-6 pb-6 -b  max-lg:max-w-lg max-lg:mx-auto">
-              <h5 className="text-primary font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4">
+              <h5 className="text-primary font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4">
                 Total
               </h5>
 
               <div className="flex items-center justify-between gap-5 ">
-                <h6 className="font-manrope font-bold text-3xl lead-10 text-primary">
+                <h6 className="font-bold text-3xl lead-10 text-primary">
                   {getCartPrice()}€
                 </h6>
               </div>

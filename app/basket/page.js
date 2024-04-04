@@ -34,7 +34,7 @@ export default function Home() {
       <Header />
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-          <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-primary">
+          <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
             Mon panier
           </h2>
           <div className="hidden lg:grid grid-cols-2 py-6">
@@ -72,7 +72,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex items-center flex-col min-[550px]:flex-row w-full max-xl:max-w-xl max-xl:mx-auto gap-2">
-                <h6 className="font-manrope font-bold text-2xl leading-9 text-primary w-full max-w-[176px] text-center">
+                <h6 className="font-bold text-2xl leading-9 text-primary w-full max-w-[176px] text-center">
                   0%{" "}
                   <span className="text-sm text-gray-300 ml-3 lg:hidden whitespace-nowrap">
                     (Delivery Charge)
@@ -155,7 +155,7 @@ export default function Home() {
                     </svg>
                   </button>
                 </div>
-                <h6 className="text-primary font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
+                <h6 className="text-primary font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
                   {getCartProductPrice(item.id)}€
                 </h6>
               </div>
@@ -178,10 +178,10 @@ export default function Home() {
               </h6>
             </div>
             <div className="flex items-center justify-between w-full py-6">
-              <p className="font-manrope font-medium text-2xl leading-9 text-gray-900">
+              <p className="font-medium text-2xl leading-9 text-gray-900">
                 Total
               </p>
-              <h6 className="font-manrope font-medium text-2xl leading-9 text-primary">
+              <h6 className="font-medium text-2xl leading-9 text-primary">
                 {getCartPrice()}€
               </h6>
             </div>
