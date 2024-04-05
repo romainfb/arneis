@@ -1,8 +1,6 @@
 "use client";
 
 import { useCart } from "@/components/(provider)/cartProvider";
-import Footer from "@/components/(structure)/Footer";
-import Header from "@/components/(structure)/Header";
 import Link from "next/link";
 
 export default function Home() {
@@ -31,7 +29,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
           <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
@@ -232,7 +229,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

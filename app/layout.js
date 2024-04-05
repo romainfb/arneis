@@ -1,4 +1,6 @@
 import { CartProvider } from "@/components/(provider)/cartProvider";
+import Footer from "@/components/(structure)/Footer";
+import Header from "@/components/(structure)/Header";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -13,7 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="lightMode">
       <CartProvider>
+        <Header />
         <body className={inter.className}>{children}</body>
+        <Footer />
       </CartProvider>
     </html>
   );
