@@ -57,12 +57,12 @@ const Header = () => {
               </a>
             </li>
             <li className="">
-              <a
-                href="#"
+              <Link
+                href="/contact"
                 className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
               >
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
               <div className="drawer drawer-end">
