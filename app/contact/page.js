@@ -1,12 +1,8 @@
 "use client";
 
-import Footer from "@/components/(structure)/Footer";
-import Header from "@/components/(structure)/Header";
-
 export default function Home() {
   return (
     <>
-      <Header />
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="grid lg:grid-cols-2 grid-cols-1">
@@ -122,7 +118,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

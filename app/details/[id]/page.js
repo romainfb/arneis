@@ -3,8 +3,6 @@
 import DetailsCard from "@/components/(products)/DetailsCard";
 import ProductCard from "@/components/(products)/PorductCard";
 import { useEffect, useState } from "react";
-import Footer from "../../../components/(structure)/Footer";
-import Header from "../../../components/(structure)/Header";
 
 export default function Home({ params }) {
   const [product, setproduct] = useState([]);
@@ -28,7 +26,6 @@ export default function Home({ params }) {
 
   return (
     <>
-      <Header />
       {/* Main hero section */}
 
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
@@ -41,7 +38,6 @@ export default function Home({ params }) {
               <ProductCard key={product.id} product={product} />
             ))}
       </section>
-      <Footer />
     </>
   );
 }

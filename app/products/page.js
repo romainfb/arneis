@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       {/* Main hero section */}
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         {products.length > 0 ? (
@@ -33,7 +32,6 @@ export default function Home() {
           </>
         )}
       </section>
-      <Footer />
     </>
   );
 }
