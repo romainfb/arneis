@@ -1,9 +1,13 @@
+"use client";
+
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
       {/* Main hero section */}
 
-      <section className="w-full h-96 flex items-center px-20 my-40 md:space-x-20 flex-col md:flex-row md:text-left text-center space-y-16 xl:px-80">
+      <section className="w-full h-96 flex items-center px-20 my-60 md:space-x-20 flex-col md:flex-row md:text-left text-center space-y-16 xl:px-80">
         <div className="flex flex-col">
           {/* Text container */}
           <span className="badge badge-outline mb-4 font-medium">
@@ -21,9 +25,13 @@ export default function Home() {
             matériaux de qualité en France par des artisans passionnés.
           </p>
           <div className="flex flex-row w-full justify-center md:justify-start">
-            <button className="btn btn-primary rounded-full mr-6">
+            <Link
+              href={"/products"}
+              className="btn btn-primary rounded-full mr-6"
+            >
               Nos produits
-            </button>
+            </Link>
+
             <button className="rounded-full text-sm font-semibold">
               Découvrir nos catégories
             </button>
