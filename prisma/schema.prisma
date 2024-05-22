@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Admin {
-  id        Int    @id
+  id        Int    @id @default(autoincrement())
   email     String?
   password  String?
   lastName  String?
@@ -19,7 +19,7 @@ model Admin {
 }
 
 model ArticleOrder {
-  id            Int    @id
+  id            Int      @id @default(autoincrement())
   orderId       Int?
   productId     Int?
   quantity      Int?
@@ -29,13 +29,14 @@ model ArticleOrder {
 }
 
 model Category {
-  id       Int      @id
-  label    String?  
-  products Product[]
+  id         Int       @id @default(autoincrement())
+  label      String?
+  thumbnail  String?
+  products   Product[]
 }
 
 model Client {
-  id        Int    @id
+  id        Int       @id @default(autoincrement())
   email     String?
   password  String?
   address   String?
@@ -47,31 +48,38 @@ model Client {
 }
 
 model Order {
-  id           Int            @id
-  clientId     Int?
-  status       String?
-  createdAt    DateTime?
-  orderDate    DateTime?
-  client       Client?         @relation(fields: [clientId], references: [id])
-  ArticleOrder ArticleOrder[]
+  id            Int            @id @default(autoincrement())
+  clientId      Int?
+  status        String?
+  createdAt     DateTime?
+  orderDate     DateTime?
+  client        Client?        @relation(fields: [clientId], references: [id])
+  ArticleOrder  ArticleOrder[]
 }
 
 model Material {
-  id       Int      @id
-  label    String?
-  products Product[]
+  id         Int       @id @default(autoincrement())
+  label      String?
+  products   Product[]
 }
 
 model Product {
-  id          Int           @id
-  name        String?
-  price       Int?
-  stock       Int?
-  description String?
-  image       String?
-  categoryId  Int?
-  materialId  Int?
-  Category    Category?      @relation(fields: [categoryId], references: [id])
-  Material    Material?      @relation(fields: [materialId], references: [id])
-  ArticleOrder ArticleOrder[]
+  id            Int            @id @default(autoincrement())
+  name          String?
+  price         Int?
+  stock         Int?
+  description   String?
+  categoryId    Int?
+  materialId    Int?
+  Category      Category?      @relation(fields: [categoryId], references: [id])
+  Material      Material?      @relation(fields: [materialId], references: [id])
+  ArticleOrder  ArticleOrder[]
+  images        ProductGallery[]
+}
+
+model ProductGallery {
+  id          Int      @id @default(autoincrement())
+  url         String
+  productId   Int
+  Product     Product  @relation(fields: [productId], references: [id])
 }
