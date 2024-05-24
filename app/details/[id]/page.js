@@ -1,7 +1,7 @@
 "use client";
 
 import DetailsCard from "@/components/(products)/DetailsCard";
-import ProductCard from "@/components/(products)/ProductCard";
+import ProductCard from "@/components/(products)/PorductCard";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
