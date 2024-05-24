@@ -1,5 +1,3 @@
-"use client";
-
 import DetailsCard from "@/components/(products)/DetailsCard";
 import ProductCard from "@/components/(products)/PorductCard";
 import { useEffect, useState } from 'react';
@@ -26,6 +24,8 @@ export default function ProductDetails() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!router.isReady) return; // Wait until router is mounted
+
     if (id) {
       fetchProductData(id)
         .then((data) => {
@@ -43,7 +43,7 @@ export default function ProductDetails() {
         .catch((err) => setError(err.message))
         .finally(() => setLoading(false));
     }
-  }, [id]);
+  }, [id, router.isReady]); // Add router.isReady to dependency array
 
   if (loading) {
     return <div>Loading...</div>;
