@@ -1,13 +1,15 @@
 import { PrismaClient } from "../../../prisma/generated/client";
-import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
+export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
   try {
-    const url = new URL(req.url);
-    const categoryId = url.searchParams.get("category") || null;
-    const limit = url.searchParams.get("limit");
+    const categoryId = req.query.category || null;
+    const limit = req.query.limit;
 
     let products;
     if (categoryId) {
@@ -23,10 +25,10 @@ export async function GET(req) {
       });
     }
 
-    prisma.$disconnect(); // Close Prisma instance after fetch
-    return NextResponse.json({ products: products });
+    await prisma.$disconnect(); // Close Prisma instance after fetch
+    return res.status(200).json({ products });
   } catch (error) {
     console.error(error);
-    return NextResponse.error();
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 }
