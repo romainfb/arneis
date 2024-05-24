@@ -8,14 +8,19 @@ import SearchModal from "../(search)/SearchModal";
 const Header = () => {
   const [isChecked, setIsChecked] = useState(false);
 
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "lightMode"
-  );
+  useEffect(() => {
+    // Check if the code is running on the client-side
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      setTheme(savedTheme ? savedTheme : "lightMode");
+    }
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+      document.querySelector("html").setAttribute("data-theme", theme);
+    }
   }, [theme]);
 
   const toggleCheck = (e) => {
