@@ -1,42 +1,38 @@
-"use client";
+// details/[id]/page.js
 
 import DetailsCard from "@/components/(products)/DetailsCard";
-import ProductCard from "@/components/(products)/PorductCard";
-import { useEffect, useState } from "react";
+import ProductCard from "@/components/(products)/ProductCard";
 
-export default function Home({ params }) {
-  const [product, setproduct] = useState([]);
-  const [relatedProducts, setrelatedProducts] = useState([]);
+export async function getServerSideProps({ params }) {
+  const res = await fetch(`https://your-domain.com/api/product?id=${params.id}`);
+  const product = await res.json();
 
-  useEffect(() => {
-    fetch(`/api/product?id=${params.id}`)
-      .then((response) => response.json())
-      .then((response) => setproduct(response.product))
-      .catch((error) => console.error(error));
-  }, []);
+  let relatedProducts = [];
+  if (product.product.categoryId) {
+    const relatedRes = await fetch(
+      `https://your-domain.com/api/products?category=${product.product.categoryId}&limit=3`
+    );
+    const related = await relatedRes.json();
+    relatedProducts = related.products.filter((p) => p.id !== product.product.id); // Ignore current product
+  }
 
-  useEffect(() => {
-    if (product.categoryId) {
-      fetch(`/api/products?category=${product.categoryId}&limit=3`)
-        .then((response) => response.json())
-        .then((response) => setrelatedProducts(response.products))
-        .catch((error) => console.error(error));
-    }
-  }, [product]);
+  return {
+    props: {
+      product: product.product,
+      relatedProducts,
+    },
+  };
+}
 
+export default function Home({ product, relatedProducts }) {
   return (
     <>
-      {/* Main hero section */}
-
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         <DetailsCard product={product} />
-
         {relatedProducts &&
-          relatedProducts
-            .filter((p) => p.id !== product.id) // Ignore current product
-            .map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          relatedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </section>
     </>
   );
