@@ -1,17 +1,17 @@
 import { PrismaClient } from "../../../prisma/generated/client";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
+export const dynamic = 'force-dynamic';
 
+export async function GET(request) {
   try {
-    const productId = req.query.id;
+    const { searchParams } = new URL(request.url);
+    const productId = searchParams.get('id');
 
     if (!productId) {
-      return res.status(400).json({ error: "Product ID is required" });
+      return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
     }
 
     const product = await prisma.product.findUnique({
@@ -20,11 +20,15 @@ export default async function handler(req, res) {
       },
     });
 
-    await prisma.$disconnect(); // Close the Prisma instance after retrieval
+    await prisma.$disconnect();
 
-    return res.status(200).json({ product });
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ product });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Internal Server Error" });
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
