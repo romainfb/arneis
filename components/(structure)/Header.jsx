@@ -7,9 +7,9 @@ import SearchModal from "../(search)/SearchModal";
 
 const Header = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [theme, setTheme] = useState("lightMode");
 
   useEffect(() => {
-    // Check if the code is running on the client-side
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
       setTheme(savedTheme ? savedTheme : "lightMode");
@@ -23,7 +23,7 @@ const Header = () => {
     }
   }, [theme]);
 
-  const toggleCheck = (e) => {
+  const toggleCheck = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
       setTheme("lightMode");
