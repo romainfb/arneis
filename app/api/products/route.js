@@ -1,13 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../prisma/generated/client";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
+export const dynamic = 'force-dynamic';
+
+export async function GET(request) {
   try {
-    const url = new URL(req.url);
-    const categoryId = url.searchParams.get("category") || null;
-    const limit = url.searchParams.get("limit");
+    const { searchParams } = new URL(request.url);
+    const categoryId = searchParams.get('category');
+    const limit = searchParams.get('limit');
 
     let products;
     if (categoryId) {
@@ -15,18 +17,18 @@ export async function GET(req) {
         where: {
           categoryId: parseInt(categoryId),
         },
-        take: limit ? parseInt(limit) : undefined, // Add limit parameter
+        take: limit ? parseInt(limit) : undefined,
       });
     } else {
       products = await prisma.product.findMany({
-        take: limit ? parseInt(limit) : undefined, // Add limit parameter
+        take: limit ? parseInt(limit) : undefined,
       });
     }
 
-    prisma.$disconnect(); // Close Prisma instance after fetch
-    return NextResponse.json({ products: products });
+    await prisma.$disconnect();
+    return NextResponse.json({ products });
   } catch (error) {
     console.error(error);
-    return NextResponse.error();
+    return NextResponse.error({ message: "Internal Server Error" }, 500);
   }
 }

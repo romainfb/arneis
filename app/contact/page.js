@@ -3,22 +3,22 @@
 export default function Home() {
   return (
     <>
-      <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="grid lg:grid-cols-2 grid-cols-1">
-            <div class="lg:mb-0 mb-10">
-              <div class="group w-full h-full">
-                <div class="relative h-full">
+      <section classNameName="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 grid-cols-1">
+            <div className="lg:mb-0 mb-10">
+              <div className="group w-full h-full">
+                <div className="relative h-full">
                   <img
                     src="https://bureau-store.fr/modules/ph_simpleblog/featured/30.jpg"
-                    class="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-primary object-cover"
+                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-primary object-cover"
                   />
-                  <h1 class="font-manrope text-white text-4xl font-bold leading-10 absolute top-11 left-11">
+                  <h1 className="font-manrope text-white text-4xl font-bold leading-10 absolute top-11 left-11">
                     Nous contacter
                   </h1>
-                  <div class="absolute bottom-0 w-full lg:p-11 p-5">
-                    <div class="bg-white rounded-lg p-6 block">
-                      <a href="javascript:;" class="flex items-center mb-6">
+                  <div className="absolute bottom-0 w-full lg:p-11 p-5">
+                    <div className="bg-white rounded-lg p-6 block">
+                      <a href="javascript:;" className="flex items-center mb-6">
                         <svg
                           width="30"
                           height="30"
@@ -34,11 +34,11 @@ export default function Home() {
                             stroke-linejoin="round"
                           />
                         </svg>
-                        <h5 class="text-black text-base font-normal leading-6 ml-5">
+                        <h5 className="text-black text-base font-normal leading-6 ml-5">
                           05 35 54 87 64
                         </h5>
                       </a>
-                      <a href="javascript:;" class="flex items-center mb-6">
+                      <a href="javascript:;" className="flex items-center mb-6">
                         <svg
                           width="30"
                           height="30"
@@ -53,11 +53,11 @@ export default function Home() {
                             stroke-linecap="round"
                           />
                         </svg>
-                        <h5 class="text-black text-base font-normal leading-6 ml-5">
+                        <h5 className="text-black text-base font-normal leading-6 ml-5">
                           contact@arneis.fr
                         </h5>
                       </a>
-                      <a href="javascript:;" class="flex items-center">
+                      <a href="javascript:;" className="flex items-center">
                         <svg
                           width="30"
                           height="30"
@@ -76,7 +76,7 @@ export default function Home() {
                             stroke-width="2"
                           />
                         </svg>
-                        <h5 class="text-black text-base font-normal leading-6 ml-5">
+                        <h5 className="text-black text-base font-normal leading-6 ml-5">
                           86 Cr de la Martinique, 33300 Bordeaux
                         </h5>
                       </a>
@@ -86,32 +86,32 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="bg-gray-50 p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">
-              <h2 class="text-primary font-manrope text-4xl font-semibold leading-10 mb-11">
+            <div className="bg-gray-50 p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">
+              <h2 className="text-primary font-manrope text-4xl font-semibold leading-10 mb-11">
                 Nous écrire
               </h2>
               <input
                 type="text"
-                class="w-full h-12 text-gray-600 placeholder-gray-400  shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                className="w-full h-12 text-gray-600 placeholder-gray-400  shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Nom"
               />
               <input
                 type="text"
-                class="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Email"
               />
               <input
                 type="text"
-                class="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Portable"
               />
 
               <input
                 type="text"
-                class="w-full h-12 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                className="w-full h-12 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Message"
               />
-              <button class="btn w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-primary bg-primary shadow-sm">
+              <button className="btn w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-primary bg-primary shadow-sm">
                 Envoyer
               </button>
             </div>
