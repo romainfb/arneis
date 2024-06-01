@@ -61,14 +61,6 @@ const Header = () => {
                 Profil
               </Link>
             </li>
-            <li className="">
-              <Link
-                href="/contact"
-                className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer"
-              >
-                Contact
-              </Link>
-            </li>
             {/* Basket modal */}
             <li>
               <div className="drawer drawer-end">

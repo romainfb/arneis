@@ -2,8 +2,8 @@
 
 import DetailsCard from "@/components/(products)/DetailsCard";
 import ProductCard from "@/components/(products)/PorductCard";
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 async function fetchProductData(id) {
   const res = await fetch(`/api/product?id=${id}`);
@@ -18,34 +18,40 @@ async function fetchRelatedProducts(categoryId, productId) {
 }
 
 export default function ProductDetails() {
-  const router = useRouter();
-  const { id } = router.query;
+  const pathname = usePathname();
+  const id = pathname.split("/").pop(); // Extraction de l'ID à partir du chemin
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!router.isReady) return; // Wait until router is mounted
+    if (!id) return; // Attendre que l'ID soit disponible
 
-    if (id) {
-      fetchProductData(id)
-        .then((data) => {
-          if (data.error) {
-            setError(data.error);
-          } else {
-            setProduct(data.product);
-            if (data.product.categoryId) {
-              fetchRelatedProducts(data.product.categoryId, data.product.id)
-                .then(setRelatedProducts)
-                .catch((err) => setError(err.message));
-            }
+    const fetchData = async () => {
+      try {
+        const data = await fetchProductData(id);
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setProduct(data.product);
+          if (data.product.categoryId) {
+            const related = await fetchRelatedProducts(
+              data.product.categoryId,
+              data.product.id
+            );
+            setRelatedProducts(related);
           }
-        })
-        .catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
-    }
-  }, [id, router.isReady]); // Add router.isReady to dependency array
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;
