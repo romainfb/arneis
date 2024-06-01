@@ -1,6 +1,6 @@
 const ContactForm = () => {
   return (
-    <section classNameName="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
+    <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
       <div className="w-full">
         <div className="flex w-full">
           <div className="bg-gray-50 p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">

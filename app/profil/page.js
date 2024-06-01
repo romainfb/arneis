@@ -3,7 +3,7 @@
 export default function Home() {
   return (
     <>
-      <section classNameName="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
+      <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-center text-center gap-12 xl:px-80 flex-wrap justify-center items-center">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex items-center justify-center sm:justify-start relative z-10 mb-5">
             <img

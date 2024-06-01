@@ -10,11 +10,11 @@ const DetaildCard = ({ product }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-md:px-2 ">
           <div className="img">
             <div className="img-box h-full rounded-lg mt-6">
-              {product.image && product.name && (
+              {product.thumbnail && product.name && (
                 <Image
-                  src={product.image}
+                  src={product.thumbnail}
                   alt={product.name}
-                  className="lg:ml-auto h-full rounded-lg"
+                  className="lg:ml-auto h-full rounded-lg object-cover"
                   width={1000}
                   height={1000}
                 />
