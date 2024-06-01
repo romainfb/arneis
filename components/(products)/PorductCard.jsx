@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="card w-[30%] bg-base-100 shadow-xl flex">
-      <figure className="h-96">
+      <figure className="h-60">
         <Link href={`/details/${id}`} className="w-full h-full">
           <Image
             src={thumbnail}

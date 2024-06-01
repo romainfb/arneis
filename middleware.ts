@@ -27,8 +27,11 @@ export async function middleware(req: NextRequest) {
     pathname !== "/login" &&
     pathname !== "/register" &&
     pathname !== "/notfound" &&
+    pathname !== "/categories" &&
+    pathname !== "" &&
+    !pathname.startsWith("/details") &&
     !pathname.startsWith("/products") &&
-    !pathname.startsWith("/")
+    !pathname.startsWith("/category")
   ) {
     const url = req.nextUrl.clone();
     url.pathname = "/login";

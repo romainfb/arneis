@@ -82,13 +82,13 @@ const Header = () => {
 
   const renderCommonLinks = () =>
     commonLinks.map((link, index) => (
-      <li key={index}>
+      <li key={index} className="mx-4">
         <div className="drawer drawer-end">
           <input id={link.id} type="checkbox" className="drawer-toggle" />
           <div className={`flex ${link.id}`}></div>
           <div className="drawer-content">
             <label htmlFor={link.id} className="drawer-button h-fit">
-              <span className="cursor-pointer text-primaryrounded-full py-2 duration-300 mx-12">
+              <span className="cursor-pointer text-primaryrounded-full py-2 duration-300 ">
                 {link.icon}
               </span>
             </label>

@@ -17,9 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="lightMode">
       <SessionProvider>
         <CartProvider>
-          <Header />
-          <body className={inter.className}>{children}</body>
-          <Footer />
+          <body className={inter.className}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
         </CartProvider>
       </SessionProvider>
     </html>
