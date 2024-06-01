@@ -40,8 +40,8 @@ const BasketModal = () => {
           >
             <div className="col-span-12 lg:col-span-2 img box">
               <img
-                src={item.image}
-                alt="speaker image"
+                src={item.thumbnail}
+                alt={item.name}
                 className="w-16 h-16 object-cover rounded-2xl"
               />
             </div>

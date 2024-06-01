@@ -1,7 +1,8 @@
-import { CartProvider } from "@/components/(provider)/cartProvider";
-import Footer from "@/components/(structure)/Footer";
-import Header from "@/components/(structure)/Header";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
+import { CartProvider } from "../components/(provider)/cartProvider";
+import Footer from "../components/(structure)/Footer";
+import Header from "../components/(structure)/Header";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,11 +15,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="lightMode">
-      <CartProvider>
-        <Header />
-        <body className={inter.className}>{children}</body>
-        <Footer />
-      </CartProvider>
+      <SessionProvider>
+        <CartProvider>
+          <Header />
+          <body className={inter.className}>{children}</body>
+          <Footer />
+        </CartProvider>
+      </SessionProvider>
     </html>
   );
 }

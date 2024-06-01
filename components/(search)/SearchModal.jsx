@@ -1,28 +1,15 @@
-"use client";
-import { useCart } from "../(provider)/cartProvider";
+import { useState } from "react";
 
 const SearchModal = () => {
-  const {
-    cart,
-    removeFromCart,
-    clearCart,
-    getCartPrice,
-    getCartProductPrice,
-    updateCartItemQuantity,
-  } = useCart();
+  const [query, setQuery] = useState("");
+  const [material, setMaterial] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [inStock, setInStock] = useState(false);
 
-  const handleIncreaseQuantity = (productId) => {
-    const updatedQuantity =
-      cart.find((item) => item.id === productId).quantity + 1;
-    updateCartItemQuantity(productId, updatedQuantity);
-  };
-
-  const handleDecreaseQuantity = (productId) => {
-    const updatedQuantity =
-      cart.find((item) => item.id === productId).quantity - 1;
-    if (updatedQuantity >= 1) {
-      updateCartItemQuantity(productId, updatedQuantity);
-    }
+  const handleSearch = () => {
+    console.log(query, material, minPrice, maxPrice, category, inStock);
   };
 
   return (
@@ -31,32 +18,55 @@ const SearchModal = () => {
         <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
           Recherche
         </h2>
-
-        <label className="form-control w-full ">
-          <div className="label">
-            <span className="label-text">
-              Vous recherchez un produit précis?
-            </span>
-          </div>
+        <div className="w-full max-w-xl">
           <input
             type="text"
-            placeholder="Canapé en cuir"
-            className="input input-bordered w-full focus:outline-none"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Rechercher par titre ou description"
+            className="input"
           />
-        </label>
-
-        <label className="form-control w-full ">
-          <div className="label">
-            <span className="label-text">
-              Vous recherchez une description précise?
-            </span>
-          </div>
           <input
             type="text"
-            placeholder="Provenant des hautes terres d'écosse.."
-            className="input input-bordered w-full focus:outline-none"
+            value={material}
+            onChange={(e) => setMaterial(e.target.value)}
+            placeholder="Matériau du produit"
+            className="input"
           />
-        </label>
+          <input
+            type="number"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            placeholder="Prix minimum"
+            className="input"
+          />
+          <input
+            type="number"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            placeholder="Prix maximum"
+            className="input"
+          />
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="Catégorie"
+            className="input"
+          />
+          <label>
+            <input
+              type="checkbox"
+              checked={inStock}
+              onChange={(e) => setInStock(e.target.checked)}
+              className="mr-2"
+            />
+            Produits en stock uniquement
+          </label>
+          <button onClick={handleSearch} className="btn btn-primary mt-4">
+            Rechercher
+          </button>
+        </div>
       </div>
     </section>
   );

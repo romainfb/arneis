@@ -1,22 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ProductCard from "../../components/(products)/PorductCard";
+import CategoryCard from "../../components/(category)/CategoryCard";
 import ProductCardSkeleton from "../../components/(products)/ProductCardSkeleton";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/api/products")
+    fetch("/api/categories")
       .then((response) => response.json())
       .then((response) => {
-        if (response.products) {
-          setProducts(response.products);
+        if (response.categories) {
+          setCategories(response.categories);
         } else {
-          setError("Failed to load products");
+          setError("Failed to load categories");
         }
       })
       .catch((error) => setError(error.message))
@@ -41,15 +41,15 @@ export default function Home() {
     <>
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         <h1 className="text-primary font-black text-5xl w-full">
-          Nos produits
+          Nos catégories
         </h1>
 
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
           ))
         ) : (
-          <div>Aucun produit trouvé</div>
+          <div>No categories found</div>
         )}
       </section>
     </>

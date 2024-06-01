@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Admin {
-  id        Int    @id @default(autoincrement())
+  id        Int    @id @default(autoincrement()) @unique
   email     String?
   password  String?
   lastName  String?
@@ -20,7 +20,7 @@ model Admin {
 }
 
 model ArticleOrder {
-  id            Int      @id @default(autoincrement())
+  id            Int      @id @default(autoincrement()) @unique
   orderId       Int?
   productId     Int?
   quantity      Int?
@@ -30,15 +30,15 @@ model ArticleOrder {
 }
 
 model Category {
-  id         Int       @id @default(autoincrement())
+  id         Int       @id @default(autoincrement()) @unique
   label      String?
   thumbnail  String?
   products   Product[]
 }
 
 model Client {
-  id        Int       @id @default(autoincrement())
-  email     String?
+  id        Int       @id @default(autoincrement()) @unique
+  email     String?   @unique
   password  String?
   address   String?
   city      String?
@@ -49,7 +49,7 @@ model Client {
 }
 
 model Order {
-  id            Int            @id @default(autoincrement())
+  id            Int            @id @default(autoincrement()) @unique
   clientId      Int?
   status        String?
   createdAt     DateTime?
@@ -59,19 +59,20 @@ model Order {
 }
 
 model Material {
-  id         Int       @id @default(autoincrement())
+  id         Int       @id @default(autoincrement()) @unique
   label      String?
   products   Product[]
 }
 
 model Product {
-  id            Int            @id @default(autoincrement())
+  id            Int            @id @default(autoincrement()) @unique
   name          String?
   price         Int?
   stock         Int?
   description   String?
   categoryId    Int?
   materialId    Int?
+  thumbnail     String?
   Category      Category?      @relation(fields: [categoryId], references: [id])
   Material      Material?      @relation(fields: [materialId], references: [id])
   ArticleOrder  ArticleOrder[]
@@ -79,7 +80,7 @@ model Product {
 }
 
 model ProductGallery {
-  id          Int      @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())  @unique
   url         String
   productId   Int
   Product     Product  @relation(fields: [productId], references: [id])
