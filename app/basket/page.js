@@ -1,7 +1,7 @@
 "use client";
 
-import { useCart } from "@/components/(provider)/cartProvider";
 import Link from "next/link";
+import { useCart } from "../../components/(provider)/cartProvider";
 
 export default function Home() {
   const {

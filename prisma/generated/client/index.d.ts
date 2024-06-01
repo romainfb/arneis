@@ -9674,7 +9674,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"Admin"> | string | null
     lastName?: StringNullableFilter<"Admin"> | string | null
     firstName?: StringNullableFilter<"Admin"> | string | null
-  }, "id">
+  }, "id" | "id">
 
   export type AdminOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9734,7 +9734,7 @@ export namespace Prisma {
     price?: IntNullableFilter<"ArticleOrder"> | number | null
     order?: XOR<OrderNullableRelationFilter, OrderWhereInput> | null
     product?: XOR<ProductNullableRelationFilter, ProductWhereInput> | null
-  }, "id">
+  }, "id" | "id">
 
   export type ArticleOrderOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9785,7 +9785,7 @@ export namespace Prisma {
     label?: StringNullableFilter<"Category"> | string | null
     thumbnail?: StringNullableFilter<"Category"> | string | null
     products?: ProductListRelationFilter
-  }, "id">
+  }, "id" | "id">
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9836,10 +9836,10 @@ export namespace Prisma {
 
   export type ClientWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    email?: string
     AND?: ClientWhereInput | ClientWhereInput[]
     OR?: ClientWhereInput[]
     NOT?: ClientWhereInput | ClientWhereInput[]
-    email?: StringNullableFilter<"Client"> | string | null
     password?: StringNullableFilter<"Client"> | string | null
     address?: StringNullableFilter<"Client"> | string | null
     city?: StringNullableFilter<"Client"> | string | null
@@ -9847,7 +9847,7 @@ export namespace Prisma {
     lastName?: StringNullableFilter<"Client"> | string | null
     firstName?: StringNullableFilter<"Client"> | string | null
     orders?: OrderListRelationFilter
-  }, "id">
+  }, "id" | "id" | "email">
 
   export type ClientOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9913,7 +9913,7 @@ export namespace Prisma {
     orderDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     client?: XOR<ClientNullableRelationFilter, ClientWhereInput> | null
     ArticleOrder?: ArticleOrderListRelationFilter
-  }, "id">
+  }, "id" | "id">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9961,7 +9961,7 @@ export namespace Prisma {
     NOT?: MaterialWhereInput | MaterialWhereInput[]
     label?: StringNullableFilter<"Material"> | string | null
     products?: ProductListRelationFilter
-  }, "id">
+  }, "id" | "id">
 
   export type MaterialOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10030,7 +10030,7 @@ export namespace Prisma {
     Material?: XOR<MaterialNullableRelationFilter, MaterialWhereInput> | null
     ArticleOrder?: ArticleOrderListRelationFilter
     images?: ProductGalleryListRelationFilter
-  }, "id">
+  }, "id" | "id">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10087,7 +10087,7 @@ export namespace Prisma {
     url?: StringFilter<"ProductGallery"> | string
     productId?: IntFilter<"ProductGallery"> | number
     Product?: XOR<ProductRelationFilter, ProductWhereInput>
-  }, "id">
+  }, "id" | "id">
 
   export type ProductGalleryOrderByWithAggregationInput = {
     id?: SortOrder

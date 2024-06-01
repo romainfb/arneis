@@ -1,9 +1,26 @@
 "use client";
 
-import ContactForm from "@/components/(contact)/ContactForm";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import CategoryCard from "../components/(category)/CategoryCard";
+import ContactForm from "../components/(contact)/ContactForm";
 
 export default function Home() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/categories?limit=3")
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.categories) {
+          setCategories(response.categories);
+        } else {
+          console.error("Failed to load categories");
+        }
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <>
       {/* Main hero section */}
@@ -111,21 +128,10 @@ export default function Home() {
             Découvrez nos différentes catégories de produits
           </p>
           <div className="flex w-full h-fit mt-20 space-x-10">
-            <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer">
-              <p className="text-secondary text-2xl flex items-end h-full font-medium">
-                Nos bois de chêne
-              </p>
-            </div>
-            <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer">
-              <p className="text-secondary text-2xl flex items-end h-full font-medium">
-                Nos bois de bouleau
-              </p>
-            </div>
-            <div className="card p-8 w-1/3 h-64 rounded-lg shadow-lg bg-cover bg-primary cursor-pointer ">
-              <p className="text-secondary text-2xl flex items-end h-full font-medium">
-                Nos bois de hêtre
-              </p>
-            </div>
+            {categories &&
+              categories.map((category) => (
+                <CategoryCard key={category.id} category={category} />
+              ))}
           </div>
         </div>
       </section>

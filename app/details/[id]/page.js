@@ -1,9 +1,9 @@
 "use client";
 
-import DetailsCard from "@/components/(products)/DetailsCard";
-import ProductCard from "@/components/(products)/PorductCard";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import DetailsCard from "../../../components/(products)/DetailsCard";
+import ProductCard from "../../../components/(products)/PorductCard";
 
 async function fetchProductData(id) {
   const res = await fetch(`/api/product?id=${id}`);
