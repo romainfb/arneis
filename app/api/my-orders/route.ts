@@ -1,15 +1,23 @@
 import { NextResponse } from "next/server";
+import { disconnectPrisma, getSession } from "../../../lib/api-utils";
 import { PrismaClient } from "../../../prisma/generated/client";
-import { auth } from "../../auth";
 
+// Initialize Prisma client
 const prisma = new PrismaClient();
 
 export const dynamic = "force-dynamic";
 
-export async function GET(request) {
+/**
+ * Handles GET requests to fetch orders for the authenticated user.
+ *
+ * @param {Request} request - The incoming GET request.
+ * @returns {Promise<NextResponse>} - The response containing the user's orders data or an error message.
+ */
+export async function GET(request: Request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    // Retrieve the authenticated user's session
+    const session = await getSession();
+    const userId = session?.user?.id ? parseInt(session.user.id) : null;
 
     if (!userId) {
       return NextResponse.json(
@@ -18,6 +26,7 @@ export async function GET(request) {
       );
     }
 
+    // Fetch orders for the authenticated user
     const orders = await prisma.order.findMany({
       where: {
         clientId: userId,
@@ -37,11 +46,12 @@ export async function GET(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await disconnectPrisma();
 
     return NextResponse.json({ orders });
   } catch (error) {
-    console.error(error);
+    console.error("GET /my-orders error:", error);
+    await disconnectPrisma();
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

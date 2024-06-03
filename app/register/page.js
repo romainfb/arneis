@@ -40,79 +40,93 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="border p-6 shadow-md w-full max-w-sm">
-        <h2 className="text-2xl mb-4">Créer un compte</h2>
-        <p className="mb-4">Entrez vos informations pour créer un compte</p>
-        <form onSubmit={onSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium">
-              Email
-            </label>
-            <input
-              type="text"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border rounded-md"
-            />
+    <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
+      <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+        <div className="w-full flex-col justify-start items-start lg:gap-14 md:gap-10 gap-8 inline-flex">
+          <div className="w-full flex-col justify-start items-start gap-4 flex">
+            <h1 className="text-primary font-black text-5xl w-full">
+              Créer un compte
+            </h1>
+            <p className="text-secondary text-base font-light leading-relaxed">
+              Entrez vos informations pour créer un compte.
+            </p>
           </div>
-          <div>
-            <label htmlFor="username" className="block text-sm font-medium">
-              Nom d'utilisateur
-            </label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium">
-              Mot de passe
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="passwordConfirm"
-              className="block text-sm font-medium"
-            >
-              Confirmation du mot de passe
-            </label>
-            <input
-              type="password"
-              id="passwordConfirm"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-          {registerError && (
-            <p className="text-red-600 text-sm">{registerError}</p>
-          )}
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-500 text-white rounded-md"
-          >
-            Créer un compte
-          </button>
-        </form>
-        <div className="mt-4 text-center text-sm">
-          Vous avez déjà un compte ?{" "}
-          <Link href="/login" className="underline">
-            Me connecter
-          </Link>
         </div>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div className="w-full flex-col justify-start items-start gap-8 flex mt-10">
+            <div className="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+              <div className="w-full flex-col justify-start items-start gap-1.5 flex">
+                <label className="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">
+                  E-mail
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
+                />
+              </div>
+            </div>
+            <div className="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+              <div className="w-full flex-col justify-start items-start gap-1.5 flex">
+                <label className="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">
+                  Nom d'utilisateur
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
+                />
+              </div>
+            </div>
+            <div className="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+              <div className="w-full flex-col justify-start items-start gap-1.5 flex">
+                <label className="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
+                />
+              </div>
+            </div>
+            <div className="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+              <div className="w-full flex-col justify-start items-start gap-1.5 flex">
+                <label className="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">
+                  Confirmation du mot de passe
+                </label>
+                <input
+                  type="password"
+                  id="passwordConfirm"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
+                />
+              </div>
+            </div>
+            {registerError && (
+              <p className="text-red-600 text-sm">{registerError}</p>
+            )}
+            <Link href={"/login"}>
+              <span className="text-primary text-sm underline">
+                Vous avez déjà un compte ? Me connecter
+              </span>
+            </Link>
+            <button
+              type="submit"
+              className="btn btn-primary w-full py-2 px-4 rounded-md"
+            >
+              Créer un compte
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
+    </section>
   );
 }

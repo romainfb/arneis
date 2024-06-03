@@ -85,38 +85,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brand section */}
-
-      <section className="h-fit w-full flex px-20 xl:px-80">
-        <div className="flex w-full h-fit justify-center items-center flex-col space-y-14 px-20">
-          <h2 className="text-primary font-bold">
-            Découvrez nos partenaires de confiance
-          </h2>
-          <div className="flex h-10 space-x-28 w-full grayscale justify-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
-              alt=""
-              className="w-48 h-full object-contain"
-            />
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/800px-Google_2015_logo.svg.png"
-              alt=""
-              className="w-48 h-full object-contain"
-            />
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-              alt=""
-              className="w-48 h-full object-contain"
-            />
-            <img
-              src="https://news.microsoft.com/wp-content/uploads/prod/sites/113/2017/06/Microsoft-logo_rgb_c-gray.png"
-              alt=""
-              className="w-48 h-full object-contain"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Catégories */}
 
       <section className="w-full px-20 xl:px-80 my-40">

@@ -42,7 +42,7 @@ export default function MonCompte() {
 
   async function fetchOrders() {
     try {
-      const response = await fetch("/api/orders");
+      const response = await fetch("/api/my-orders");
       const data = await response.json();
       if (response.ok) {
         const ordersWithDetails = await Promise.all(

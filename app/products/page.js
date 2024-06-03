@@ -10,17 +10,25 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/api/products")
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.products) {
-          setProducts(response.products);
+    const fetchProducts = async () => {
+      try {
+        const params = new URLSearchParams(window.location.search).toString();
+        const response = await fetch(`/api/products?${params}`);
+        const data = await response.json();
+
+        if (data.products) {
+          setProducts(data.products);
         } else {
           setError("Failed to load products");
         }
-      })
-      .catch((error) => setError(error.message))
-      .finally(() => setLoading(false));
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   if (loading) {
@@ -39,18 +47,26 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
+      <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center xl:px-80 flex-wrap">
         <h1 className="text-primary font-black text-5xl w-full">
           Nos produits
         </h1>
+        <div className="text-sm breadcrumbs mt-2 mb-10">
+          <ul>
+            <li>Produits</li>
+            <li>Tous nos produits</li>
+          </ul>
+        </div>
 
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <div>Aucun produit trouvé</div>
-        )}
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <div>Aucun produit trouvé</div>
+          )}
+        </div>
       </section>
     </>
   );

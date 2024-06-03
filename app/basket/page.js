@@ -53,7 +53,7 @@ export default function Home() {
               <div className="flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto">
                 <div className="img-box">
                   <img
-                    src={item.image}
+                    src={item.thumbnail}
                     alt="perfume bottle image"
                     className="h-40 w-40 object-cover rounded-xl"
                   />
@@ -207,25 +207,29 @@ export default function Home() {
                 </svg>
               </button>
             </Link>
-            <button className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-primary font-semibold text-lg text-accent flex transition-all duration-500 hover:bg-primary">
-              Accéder au paiement
-              <svg
-                className="ml-2"
-                xmlns="http://www.w3.org/2000/svg"
-                width="23"
-                height="22"
-                viewBox="0 0 23 22"
-                fill="none"
-              >
-                <path
-                  d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998"
-                  stroke="white"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+            <Link href="/checkout">
+              <button className="rounded-full py-4 px-4 w-full max-w-[280px]  flex items-center bg-primary justify-center transition-all duration-500">
+                <span className="px-2 font-semibold text-lg leading-8 text-accent">
+                  Passer au paiement
+                </span>
+                <svg
+                  className="ml-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="23"
+                  height="22"
+                  viewBox="0 0 23 22"
+                  fill="none"
+                >
+                  <path
+                    d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998"
+                    stroke="white"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </Link>
           </div>
         </div>
       </section>

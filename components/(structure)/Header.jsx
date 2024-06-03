@@ -45,6 +45,7 @@ const Header = () => {
     { href: "/products", text: "Produits", className: "text-primary" },
     { href: "/categories", text: "Catégories", className: "text-primary" },
     { href: "/account", text: "Mon compte", className: "text-primary" },
+    { href: "/dashboard", text: "Tableau de bord", className: "text-primary" },
     // Suppression des liens de connexion et d'inscription, car l'utilisateur est déjà connecté
   ];
 

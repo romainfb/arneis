@@ -11,33 +11,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id        Int    @id @default(autoincrement()) @unique
-  email     String?
-  password  String?
-  lastName  String?
-  firstName String?
-}
-
 model ArticleOrder {
-  id            Int      @id @default(autoincrement()) @unique
-  orderId       Int?
-  productId     Int?
-  quantity      Int?
-  price         Int?
-  order         Order?   @relation(fields: [orderId], references: [id])
-  product       Product? @relation(fields: [productId], references: [id])
+  id        Int      @id @unique @default(autoincrement())
+  orderId   Int?
+  productId Int?
+  quantity  Int?
+  price     Int?
+  order     Order?   @relation(fields: [orderId], references: [id])
+  product   Product? @relation(fields: [productId], references: [id])
 }
 
 model Category {
-  id         Int       @id @default(autoincrement()) @unique
-  label      String?
-  thumbnail  String?
-  products   Product[]
+  id        Int       @id @unique @default(autoincrement())
+  label     String?
+  thumbnail String?
+  products  Product[]
 }
 
 model Client {
-  id        Int       @id @default(autoincrement()) @unique
+  id        Int       @id @unique @default(autoincrement())
   email     String?   @unique
   password  String?
   address   String?
@@ -45,43 +37,74 @@ model Client {
   createdAt DateTime?
   lastName  String?
   firstName String?
+  role      String    @default("user")
   orders    Order[]
+  checkoutMethods CheckoutMethod[]
 }
 
 model Order {
-  id            Int            @id @default(autoincrement()) @unique
-  clientId      Int?
-  status        String?
-  createdAt     DateTime?
-  orderDate     DateTime?
-  client        Client?        @relation(fields: [clientId], references: [id])
-  ArticleOrder  ArticleOrder[]
+  id           Int            @id @unique @default(autoincrement())
+  clientId     Int?
+  status       String?
+  createdAt    DateTime?
+  orderDate    DateTime?
+  client       Client?        @relation(fields: [clientId], references: [id])
+  ArticleOrder ArticleOrder[]
 }
 
 model Material {
-  id         Int       @id @default(autoincrement()) @unique
-  label      String?
-  products   Product[]
+  id               Int                @id @unique @default(autoincrement())
+  label            String?
+  products         Product[]          @relation("ProductMaterials")
+  ProductMaterials ProductMaterials[]
 }
 
 model Product {
-  id            Int            @id @default(autoincrement()) @unique
-  name          String?
-  price         Int?
-  stock         Int?
-  description   String?
-  categoryId    Int?
-  materialId    Int?
-  thumbnail     String?
-  Category      Category?      @relation(fields: [categoryId], references: [id])
-  Material      Material?      @relation(fields: [materialId], references: [id])
-  ArticleOrder  ArticleOrder[]
-  images        ProductGallery[]
+  id               Int                @id @unique @default(autoincrement())
+  name             String?
+  price            Int?
+  stock            Int?
+  description      String?
+  categoryId       Int?
+  thumbnail        String?
+  Category         Category?          @relation(fields: [categoryId], references: [id])
+  materials        Material[]         @relation("ProductMaterials")
+  ArticleOrder     ArticleOrder[]
+  images           ProductGallery[]
+  ProductMaterials ProductMaterials[]
+}
+
+model ProductMaterials {
+  productId  Int
+  materialId Int
+  Product    Product  @relation(fields: [productId], references: [id])
+  Material   Material @relation(fields: [materialId], references: [id])
+
+  @@id([productId, materialId])
 }
 
 model ProductGallery {
-  id          Int      @id @default(autoincrement())  @unique
-  url         String
-  productId   Int
-  Product     Product  @relation(fields: [productId], references: [id])
+  id        Int     @id @unique @default(autoincrement())
+  url       String
+  productId Int
+  Product   Product @relation(fields: [productId], references: [id])
+}
+
+model Contact {
+  id       Int      @id @unique @default(autoincrement())
+  email    String?
+  sujet    String?
+  message  String?
+}
+
+model CheckoutMethod {
+  id             Int      @id @unique @default(autoincrement())
+  userId         Int
+  cardType       String
+  cardHolderName String
+  cardNumber     String
+  expirationDate DateTime
+  client         Client   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, cardNumber])
 }

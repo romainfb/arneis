@@ -15,7 +15,6 @@ export default function CategoryPageDetails() {
 
   // Extract the category ID from the URL pathname
   const params = useParams();
-  console.log("params", params);
 
   const id = params.id;
 
@@ -95,7 +94,7 @@ export default function CategoryPageDetails() {
             </div>
           </>
         )}
-        <div className="w-full flex flex-row gap-12 flex-wrap">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
           {products.length > 0 ? (
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
