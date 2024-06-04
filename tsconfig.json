@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/login/page.js",
-    "components/(category)/CategoryCard.jsx"
+    "components/(category)/CategoryCard.jsx",
+    "app/api/products/route.ts"
   ],
   "exclude": ["node_modules"]
 }

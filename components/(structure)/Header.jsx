@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, ShoppingBasket } from "lucide-react";
+import { Menu, Search, ShoppingBasket } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,11 +12,10 @@ const Header = () => {
   const [theme, setTheme] = useState("lightMode");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const { data: session, status } = useSession(); // Utilisation de la destructuration pour récupérer 'data' et 'status'
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (status === "authenticated") {
-      // Utilisation de la variable 'status' directement
       setIsLoggedIn(true);
     }
   }, [status]);
@@ -24,28 +23,30 @@ const Header = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
-      setTheme(savedTheme || "lightMode"); // Utilisation de l'opérateur logique '||' pour une syntaxe plus concise
+      setTheme(savedTheme || "lightMode");
     }
   }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("theme", theme);
-      document.documentElement.setAttribute("data-theme", theme); // Utilisation de 'document.documentElement' pour cibler l'élément HTML
+      document.documentElement.setAttribute("data-theme", theme);
     }
   }, [theme]);
 
-  const toggleCheck = () => {
-    setIsChecked(!isChecked);
-    setTheme(isChecked ? "lightMode" : "darkMode"); // Simplification du code
-  };
+  const linksWhenAdmin = [
+    { href: "/", text: "Arneis", className: "text-primary font-bold" },
+    { href: "/products", text: "Produits", className: "text-primary" },
+    { href: "/categories", text: "Catégories", className: "text-primary" },
+    { href: "/account", text: "Mon compte", className: "text-primary" },
+    { href: "/dashboard", text: "Tableau de bord", className: "text-primary" },
+  ];
 
   const linksWhenLoggedIn = [
     { href: "/", text: "Arneis", className: "text-primary font-bold" },
     { href: "/products", text: "Produits", className: "text-primary" },
     { href: "/categories", text: "Catégories", className: "text-primary" },
     { href: "/account", text: "Mon compte", className: "text-primary" },
-    // Suppression des liens de connexion et d'inscription, car l'utilisateur est déjà connecté
   ];
 
   const linksWhenLoggedOut = [
@@ -82,13 +83,13 @@ const Header = () => {
 
   const renderCommonLinks = () =>
     commonLinks.map((link, index) => (
-      <li key={index}>
+      <li key={index} className="mx-4">
         <div className="drawer drawer-end">
           <input id={link.id} type="checkbox" className="drawer-toggle" />
           <div className={`flex ${link.id}`}></div>
           <div className="drawer-content">
             <label htmlFor={link.id} className="drawer-button h-fit">
-              <span className="cursor-pointer text-primaryrounded-full py-2 duration-300 mx-12">
+              <span className="cursor-pointer text-primary rounded-full py-2 duration-300">
                 {link.icon}
               </span>
             </label>
@@ -107,14 +108,22 @@ const Header = () => {
       </li>
     ));
 
+  const getLinksToRender = () => {
+    if (isLoggedIn) {
+      if (session?.user?.role === "admin") {
+        return linksWhenAdmin;
+      }
+      return linksWhenLoggedIn;
+    }
+    return linksWhenLoggedOut;
+  };
+
   return (
     <div className="fixed top-4 left-0 right-0 ml-auto mr-auto z-10">
       <div className="xl:w-fit w-fit h-14 bg-neutral rounded-full fixed top-4 left-0 right-0 ml-auto mr-auto flex justify-between items-center px-8 shadow-[0px_10px_40px_0px_rgba(0,0,0,0.2)]">
-        <nav>
+        <nav className="hidden md:block">
           <ul className="flex justify-between items-center text-sm font-medium">
-            {isLoggedIn
-              ? renderLinks(linksWhenLoggedIn)
-              : renderLinks(linksWhenLoggedOut)}
+            {renderLinks(getLinksToRender())}
             {isLoggedIn && (
               <li>
                 <button
@@ -128,12 +137,28 @@ const Header = () => {
             {renderCommonLinks()}
           </ul>
         </nav>
-        {/*<input
-          type="checkbox"
-          className="toggle [--tglbg:#1f2937] bg-neutral hover:bg-neutral border-primary"
-          checked={isChecked}
-          onChange={toggleCheck}
-            /> */}
+        <div className="md:hidden dropdown w-full">
+          <div tabIndex={0} role="button" className="m-1">
+            <Menu size="24" />
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-center"
+          >
+            {renderLinks(getLinksToRender())}
+            {isLoggedIn && (
+              <li>
+                <button
+                  onClick={() => signOut()}
+                  className="text-primary mx-4 hover:bg-secondary rounded-full py-2 px-3 duration-300 cursor-pointer items-center"
+                >
+                  Déconnexion
+                </button>
+              </li>
+            )}
+            {renderCommonLinks()}
+          </ul>
+        </div>
       </div>
     </div>
   );

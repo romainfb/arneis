@@ -2,8 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import { useCart } from "../(provider)/cartProvider";
 
-const DetaildCard = ({ product }) => {
+const DetaildCard = ({ product, categoryName, materials }) => {
+  const { addToCart } = useCart(); // Utilisez le hook useCart pour accéder à addToCart
+
+  const handleAddToCart = () => {
+    addToCart(product); // Appel de la fonction addToCart avec le produit en tant que paramètre
+    toast.success("Produit ajouté au panier avec succès!");
+  };
+
   return (
     <section className="flex mb-10">
       <div className="w-full">
@@ -23,8 +32,8 @@ const DetaildCard = ({ product }) => {
           </div>
           <div className="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
             <div className="data w-full max-w-xl">
-              <p className="text-lg font-medium leading-8 text-indigo-600 mb-4">
-                <Link href="/products">Boutique</Link>&nbsp; /&nbsp;{" "}
+              <p className="text-lg font-medium leading-8 my-6">
+                <Link href="/products">Produits</Link>&nbsp; /&nbsp;{" "}
                 {product.name}
               </p>
 
@@ -32,78 +41,41 @@ const DetaildCard = ({ product }) => {
                 {product.name}
               </h2>
 
-              <span className="text-sm font-semibold text-gray-900 mb-10 bg-blueprimary py-1 px-2 rounded-3xl">
+              <span className="text-sm font-semibold text-gray-900 mb-10 bg-blueprimary py-1 px-2 rounded-3xl bg-secondary bg-opacity-50">
                 {product.stock > 0 ? "En stock" : "Rupture de stock"}
               </span>
+
+              <span className="text-sm ml-2 font-semibold text-gray-900 mb-10 bg-blueprimary py-1 px-2 rounded-3xl bg-secondary bg-opacity-50">
+                Catégorie: {categoryName}
+              </span>
+
+              <h3 className="text-lg font-semibold text-gray-900 mb-6 mt-4">
+                Matériaux
+                <div className="space-x-2 mt-2">
+                  {materials &&
+                    materials.map((material) => (
+                      <span
+                        className="text-sm font-semibold text-gray-900 mb-10 bg-blueprimary py-1 px-2 rounded-3xl bg-secondary bg-opacity-50"
+                        key={material.id}
+                      >
+                        {material.label}
+                      </span>
+                    ))}
+                </div>
+              </h3>
 
               <p className="text-gray-500 text-base font-normal mb-5 mt-4">
                 {product.description}
               </p>
-              <ul className="grid gap-y-4 mb-8">
-                <li className="flex items-center gap-3">
-                  <svg
-                    width="26"
-                    height="26"
-                    viewBox="0 0 26 26"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="26" height="26" rx="13" fill="#c1dcdc" />
-                    <path
-                      d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                      stroke="white"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <span className="font-normal text-base text-gray-900 ">
-                    3 color shirt
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <svg
-                    width="26"
-                    height="26"
-                    viewBox="0 0 26 26"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="26" height="26" rx="13" fill="#c1dcdc" />
-                    <path
-                      d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                      stroke="white"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <span className="font-normal text-base text-gray-900 ">
-                    Pure Cotton Shirt with 60% as 40%
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <svg
-                    width="26"
-                    height="26"
-                    viewBox="0 0 26 26"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="26" height="26" rx="13" fill="#c1dcdc" />
-                    <path
-                      d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                      stroke="white"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <span className="font-normal text-base text-gray-900 ">
-                    all size is available
-                  </span>
-                </li>
+              <ul className="grid gap-y-4 mb-8 text-4xl font-black py-4">
+                <li>{product.price} €</li>
               </ul>
 
               <div className="flex items-center gap-3">
-                <button className="text-center w-full px-5 py-4 rounded-[100px] bg-black flex items-center justify-center font-semibold text-lg text-white shadow-sm transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-400">
+                <button
+                  onClick={handleAddToCart}
+                  className="btn text-center btn-primary w-1/2"
+                >
                   Ajouter au panier
                 </button>
               </div>

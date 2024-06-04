@@ -10,6 +10,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: {},
         password: {},
       },
+      // @ts-ignore
       authorize: async (credentials) => {
         const user = await getClientByEmail(credentials.email as string);
         if (
@@ -23,8 +24,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role; // Ajouter le rôle de l'utilisateur au jeton
+      }
+      return token;
+    },
     async session({ session, token }) {
       session.user.id = token.sub as string;
+      session.user.role = token.role; // Ajouter le rôle de l'utilisateur à la session
       return session;
     },
   },

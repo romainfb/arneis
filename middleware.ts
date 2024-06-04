@@ -27,12 +27,22 @@ export async function middleware(req: NextRequest) {
     pathname !== "/login" &&
     pathname !== "/register" &&
     pathname !== "/notfound" &&
+    pathname !== "/categories" &&
+    pathname !== "/basket" &&
+    !pathname.startsWith("/details") &&
     !pathname.startsWith("/products") &&
-    !pathname.startsWith("/")
+    !pathname.startsWith("/category")
   ) {
-    const url = req.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+    // Vérifie si la route est la route principale ("/")
+    if (pathname === "/") {
+      // Continue la requête si la route est la route principale
+      return NextResponse.next();
+    } else {
+      // Redirige vers la page de connexion pour les autres routes non autorisées
+      const url = req.nextUrl.clone();
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
   }
 
   // Continue la requête si l'utilisateur est authentifié ou si la requête est pour les pages de connexion, d'inscription ou de profil public

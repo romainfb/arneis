@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SearchModal = () => {
   const [query, setQuery] = useState("");
@@ -8,8 +8,31 @@ const SearchModal = () => {
   const [category, setCategory] = useState("");
   const [inStock, setInStock] = useState(false);
 
+  const [materialsList, setMaterialsList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/materials")
+      .then((res) => res.json())
+      .then((data) => setMaterialsList(data.materials));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategoriesList(data.categories));
+  }, []);
+
   const handleSearch = () => {
-    console.log(query, material, minPrice, maxPrice, category, inStock);
+    const params = new URLSearchParams();
+    if (query) params.append("query", query);
+    if (material) params.append("material", material);
+    if (minPrice) params.append("minPrice", minPrice);
+    if (maxPrice) params.append("maxPrice", maxPrice);
+    if (category) params.append("category", category);
+    if (inStock) params.append("inStock", inStock.toString());
+
+    window.location.href = `/products?${params.toString()}`;
   };
 
   return (
@@ -18,52 +41,70 @@ const SearchModal = () => {
         <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
           Recherche
         </h2>
-        <div className="w-full max-w-xl">
+        <div className="w-full space-y-8 font-normal">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Rechercher par titre ou description"
-            className="input"
+            className="input w-full"
           />
-          <input
-            type="text"
+          <select
             value={material}
             onChange={(e) => setMaterial(e.target.value)}
-            placeholder="Matériau du produit"
-            className="input"
-          />
+            className="input w-full"
+          >
+            <option value="">Sélectionnez un type de matériaux</option>
+
+            {materialsList &&
+              materialsList.map((material) => (
+                <option key={material.id} value={material.id}>
+                  {material.label}
+                </option>
+              ))}
+          </select>
           <input
             type="number"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
             placeholder="Prix minimum"
-            className="input"
+            className="input w-full"
           />
           <input
             type="number"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
             placeholder="Prix maximum"
-            className="input"
+            className="input w-full"
           />
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            placeholder="Catégorie"
-            className="input"
-          />
-          <label>
+            className="input w-full"
+          >
+            <option value="">Sélectionnez une catégorie</option>
+
+            {categoriesList &&
+              categoriesList.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.label}
+                </option>
+              ))}
+          </select>
+
+          <label className="w-full flex items-center">
             <input
               type="checkbox"
               checked={inStock}
               onChange={(e) => setInStock(e.target.checked)}
-              className="mr-2"
+              className="mr-3 checkbox"
             />
             Produits en stock uniquement
           </label>
-          <button onClick={handleSearch} className="btn btn-primary mt-4">
+          <button
+            onClick={handleSearch}
+            className="btn btn-primary mt-4 w-full"
+          >
             Rechercher
           </button>
         </div>

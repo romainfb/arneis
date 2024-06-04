@@ -119,14 +119,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.AdminScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  password: 'password',
-  lastName: 'lastName',
-  firstName: 'firstName'
-};
-
 exports.Prisma.ArticleOrderScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
@@ -149,7 +141,8 @@ exports.Prisma.ClientScalarFieldEnum = {
   city: 'city',
   createdAt: 'createdAt',
   lastName: 'lastName',
-  firstName: 'firstName'
+  firstName: 'firstName',
+  role: 'role'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -172,8 +165,12 @@ exports.Prisma.ProductScalarFieldEnum = {
   stock: 'stock',
   description: 'description',
   categoryId: 'categoryId',
-  materialId: 'materialId',
   thumbnail: 'thumbnail'
+};
+
+exports.Prisma.ProductMaterialsScalarFieldEnum = {
+  productId: 'productId',
+  materialId: 'materialId'
 };
 
 exports.Prisma.ProductGalleryScalarFieldEnum = {
@@ -182,14 +179,25 @@ exports.Prisma.ProductGalleryScalarFieldEnum = {
   productId: 'productId'
 };
 
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  sujet: 'sujet',
+  message: 'message'
+};
+
+exports.Prisma.CheckoutMethodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  cardType: 'cardType',
+  cardHolderName: 'cardHolderName',
+  cardNumber: 'cardNumber',
+  expirationDate: 'expirationDate'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -197,16 +205,23 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 
 exports.Prisma.ModelName = {
-  Admin: 'Admin',
   ArticleOrder: 'ArticleOrder',
   Category: 'Category',
   Client: 'Client',
   Order: 'Order',
   Material: 'Material',
   Product: 'Product',
-  ProductGallery: 'ProductGallery'
+  ProductMaterials: 'ProductMaterials',
+  ProductGallery: 'ProductGallery',
+  Contact: 'Contact',
+  CheckoutMethod: 'CheckoutMethod'
 };
 
 /**
