@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function LoginPage() {
         router.push("/");
       }
     } catch (error) {
-      setLoginError(error.message || "Login failed");
+      setLoginError(true);
     }
   };
 
@@ -80,6 +81,10 @@ export default function LoginPage() {
                 Vous n'avez pas encore de compte ? Créez-en un !
               </span>
             </Link>
+            {loginError &&
+              toast.success(
+                "Une erreur s'est produite. Veuillez vérifier les champs du formulaire."
+              )}
             <button
               type="submit"
               className="btn btn-primary w-full py-2 px-4 rounded-md"

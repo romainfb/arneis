@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -61,6 +62,7 @@ export default function RegisterPage() {
                 </label>
                 <input
                   type="text"
+                  required
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +78,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   id="username"
+                  required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
@@ -90,6 +93,7 @@ export default function RegisterPage() {
                 <input
                   type="password"
                   id="password"
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
@@ -104,6 +108,7 @@ export default function RegisterPage() {
                 <input
                   type="password"
                   id="passwordConfirm"
+                  required
                   value={passwordConfirm}
                   onChange={(e) => setPasswordConfirm(e.target.value)}
                   className="w-full focus:outline-none bg-accent text-primary placeholder-secondary text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"
@@ -111,7 +116,9 @@ export default function RegisterPage() {
               </div>
             </div>
             {registerError && (
-              <p className="text-red-600 text-sm">{registerError}</p>
+              <p className="text-red-600 text-sm">
+                {toast.success(registerError)}
+              </p>
             )}
             <Link href={"/login"}>
               <span className="text-primary text-sm underline">

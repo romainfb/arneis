@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { useCart } from "../(provider)/cartProvider";
 
 const DetaildCard = ({ product, categoryName, materials }) => {
@@ -9,6 +10,7 @@ const DetaildCard = ({ product, categoryName, materials }) => {
 
   const handleAddToCart = () => {
     addToCart(product); // Appel de la fonction addToCart avec le produit en tant que paramètre
+    toast.success("Produit ajouté au panier avec succès!");
   };
 
   return (

@@ -58,3 +58,56 @@ export async function GET(request: Request) {
     );
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    // Retrieve the authenticated user's session
+    const session = await getSession();
+    const userId = session?.user?.id ? parseInt(session.user.id) : null;
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "User ID is required" },
+        { status: 400 }
+      );
+    }
+
+    // Parse the incoming request body
+    const { orderDate, ArticleOrder } = await request.json();
+
+    // Create a new order
+    const newOrder = await prisma.order.create({
+      data: {
+        clientId: userId,
+        orderDate,
+        ArticleOrder: {
+          create: ArticleOrder,
+        },
+      },
+      select: {
+        id: true,
+        status: true,
+        orderDate: true,
+        ArticleOrder: {
+          select: {
+            id: true,
+            productId: true,
+            quantity: true,
+            price: true,
+          },
+        },
+      },
+    });
+
+    await prisma.$disconnect();
+
+    return NextResponse.json({ order: newOrder }, { status: 201 });
+  } catch (error) {
+    console.error("POST /my-orders error:", error);
+    await prisma.$disconnect();
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

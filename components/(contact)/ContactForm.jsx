@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -33,11 +34,12 @@ const ContactForm = () => {
           sujet: "",
           message: "",
         });
+        toast.success("Votre message a bien été envoyé");
       } else {
-        console.error("Erreur lors de la soumission du formulaire");
+        toast.error("Erreur lors de l'envoi du message");
       }
     } catch (error) {
-      console.error("Erreur lors de la soumission du formulaire :", error);
+      toast.error("Erreur lors de la soumission du formulaire :", error);
     }
   };
 
@@ -57,6 +59,7 @@ const ContactForm = () => {
                 onChange={handleChange}
                 className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Email"
+                required
               />
               <input
                 type="text"
@@ -65,6 +68,7 @@ const ContactForm = () => {
                 onChange={handleChange}
                 className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
                 placeholder="Sujet"
+                required
               />
 
               <textarea
@@ -73,6 +77,7 @@ const ContactForm = () => {
                 onChange={handleChange}
                 className="w-full h-32 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-lg border border-gray-200 focus:outline-none pl-4 mb-10 resize-none"
                 placeholder="Message"
+                required
               />
               <button
                 type="submit"

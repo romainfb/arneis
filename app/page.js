@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* Catégories */}
 
-      <section className="w-full px-20 xl:px-80 my-40">
+      <section className="flex w-full px-20 xl:px-80 my-40 ">
         <div className="flex flex-col items-center w-full">
           <h2 className="text-primary text-3xl font-semibold">
             Nos catégories

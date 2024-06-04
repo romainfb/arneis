@@ -1,31 +1,61 @@
 "use client";
 
 import Link from "next/link";
-import CheckoutMethods from "../../components/(checkout)/CheckoutMethods";
+import { useState } from "react";
 import { useCart } from "../../components/(provider)/cartProvider";
 
 export default function Payment() {
   const { cart, getCartPrice, clearCart } = useCart();
+  const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
-    // Ici, vous pouvez intégrer votre logique de traitement de paiement
-    // Par exemple, appeler une API de paiement
-    // clearCart() pour vider le panier après le paiement réussi
-    clearCart();
-    alert("Paiement réussi !");
+    setLoading(true);
+    try {
+      const response = await fetch("/api/my-orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderDate: new Date(),
+          ArticleOrder: cart.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const result = await response.json();
+      console.log("Order created successfully:", result);
+
+      clearCart();
+      alert("Paiement réussi !");
+      window.location.href = "/account";
+    } catch (error) {
+      console.error("Payment error:", error);
+      alert("Une erreur s'est produite lors du paiement. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-          <h2 className="title font-bold text-4xl leading-10 mb-8 text-center text-primary">
-            Paiement
-          </h2>
+          <h1 className="text-primary font-black text-5xl w-full">
+            Confirmation de paiement
+          </h1>
+          <p className="text-secondary text-base font-light leading-relaxed mt-2">
+            Confirmez votre commande et procédez au paiement.
+          </p>
 
-          <CheckoutMethods />
-
-          <div className="rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto bg-gray-50">
+          <div className="rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto bg-gray-50 mt-20">
             <h3 className="font-semibold text-2xl leading-8 mb-6 text-gray-900">
               Récapitulatif de la commande
             </h3>
@@ -92,8 +122,9 @@ export default function Payment() {
             <button
               onClick={handlePayment}
               className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-primary font-semibold text-lg text-accent flex transition-all duration-500 hover:bg-primary"
+              disabled={loading}
             >
-              Confirmer le paiement
+              {loading ? "Processing..." : "Confirmer le paiement"}
               <svg
                 className="ml-2"
                 xmlns="http://www.w3.org/2000/svg"

@@ -34,9 +34,11 @@ export default function Home() {
   if (loading) {
     return (
       <section className="w-full h-fit px-20 my-40 flex flex-row md:flex-row md:text-left text-center gap-12 xl:px-80 flex-wrap">
-        {[...Array(6)].map((_, index) => (
-          <ProductCardSkeleton key={index} />
-        ))}
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+          {[...Array(6)].map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+        </div>
       </section>
     );
   }

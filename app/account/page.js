@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import AccountSkeleton from "../../components/(account)/AccountSkeleton";
 import OrderInfos from "../../components/(order)/OrderInfos";
 import ProfilInfos from "../../components/(profil)/ProfilInfos";
@@ -139,6 +140,7 @@ export default function MonCompte() {
       const data = await response.json();
       if (response.ok) {
         setUser(data.user);
+        toast.success("Vos informations ont été mises à jour avec succès!");
         setIsEditing(false);
       } else {
         console.error(data.error);
