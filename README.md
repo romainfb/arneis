@@ -1,3 +1,9 @@
+# Arneis - Online furniture ecommerce website
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Awesome](https://awesome.re/badge.svg)](https://github.com)![Javascript](https://img.shields.io/badge/javascript-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+
+Arneis is an e-commerce website that allows users to discover products, categories and buy them.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
