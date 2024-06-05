@@ -5,7 +5,7 @@ import { useCart } from "../(provider)/cartProvider";
 
 const ProductCard = ({ product }) => {
   const { name, thumbnail, price, description, id } = product;
-  const { addToCart } = useCart(); // Utilisez le hook useCart pour accéder à addToCart
+  const { addToCart } = useCart();
 
   const truncatedDescription =
     description.length > 50
@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       : description;
 
   const handleAddToCart = () => {
-    addToCart(product); // Appel de la fonction addToCart avec le produit en tant que paramètre
+    addToCart(product);
     toast.success("Produit ajouté au panier avec succès!");
   };
 

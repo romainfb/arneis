@@ -35,7 +35,7 @@ const Header = () => {
   }, [theme]);
 
   const linksWhenAdmin = [
-    { href: "/", text: "Arneis", className: "text-primary font-bold" },
+    { href: "/", text: "Airneis", className: "text-primary font-bold" },
     { href: "/products", text: "Produits", className: "text-primary" },
     { href: "/categories", text: "Catégories", className: "text-primary" },
     { href: "/account", text: "Mon compte", className: "text-primary" },
@@ -43,14 +43,14 @@ const Header = () => {
   ];
 
   const linksWhenLoggedIn = [
-    { href: "/", text: "Arneis", className: "text-primary font-bold" },
+    { href: "/", text: "Airneis", className: "text-primary font-bold" },
     { href: "/products", text: "Produits", className: "text-primary" },
     { href: "/categories", text: "Catégories", className: "text-primary" },
     { href: "/account", text: "Mon compte", className: "text-primary" },
   ];
 
   const linksWhenLoggedOut = [
-    { href: "/", text: "Arneis", className: "text-primary font-bold" },
+    { href: "/", text: "Airneis", className: "text-primary font-bold" },
     { href: "/products", text: "Produits", className: "text-primary" },
     { href: "/categories", text: "Catégories", className: "text-primary" },
     { href: "/login", text: "Connexion", className: "text-primary" },

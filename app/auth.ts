@@ -26,13 +26,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role; // Ajouter le rôle de l'utilisateur au jeton
+        // @ts-ignore
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.sub as string;
-      session.user.role = token.role; // Ajouter le rôle de l'utilisateur à la session
+      // @ts-ignore
+      session.user.role = token.role;
       return session;
     },
   },
@@ -40,6 +42,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   session: {
-    maxAge: 30 * 24 * 60 * 60, // 30 jours
+    maxAge: 30 * 24 * 60 * 60,
   },
 });

@@ -3,9 +3,17 @@ import { PrismaClient } from "../prisma/generated/client";
 
 const prisma = new PrismaClient();
 
-export async function roleChecker(role: string) {
+/**
+ * Checks if the currently authenticated user has the specified role.
+ * Returns false if the user does not have the required role, true otherwise.
+ *
+ * @param {string} role - The role to check against.
+ * @returns {Promise<boolean>} - Returns false if the user does not have the required role, true otherwise.
+ */
+export async function roleChecker(role: string): Promise<boolean> {
   const session = await auth();
 
+  // @ts-ignore
   const userRole = session?.user?.role;
   const userId = session?.user?.id;
 
@@ -13,7 +21,6 @@ export async function roleChecker(role: string) {
     return false;
   }
 
-  // Vérifier dans la base de données si l'utilisateur a le rôle demandé
   const user = await prisma.client.findUnique({
     where: {
       id: Number(userId),

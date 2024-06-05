@@ -2,14 +2,21 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "../../../prisma/generated/client";
 import { auth } from "../../auth";
 
+// Initialize Prisma client
 const prisma = new PrismaClient();
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Handles GET requests to fetch the checkout details of the authenticated user.
+ *
+ * @param {Request} request - The incoming GET request.
+ * @returns {Promise<NextResponse>} - The response containing the user data or an error message.
+ */
 export async function GET(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -39,7 +46,7 @@ export async function GET(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -47,7 +54,7 @@ export async function GET(request) {
 
     return NextResponse.json({ user });
   } catch (error) {
-    console.error(error);
+    console.error(error); // Log the error
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -55,10 +62,16 @@ export async function GET(request) {
   }
 }
 
+/**
+ * Handles PATCH requests to update the checkout details of the authenticated user.
+ *
+ * @param {Request} request - The incoming PATCH request.
+ * @returns {Promise<NextResponse>} - The response containing the updated user data or an error message.
+ */
 export async function PATCH(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -68,7 +81,7 @@ export async function PATCH(request) {
     }
 
     const { cardType, cardHolderName, cardNumber, expirationDate } =
-      await request.json();
+      await request.json(); // Parse request body
 
     if (!cardType || !cardHolderName || !cardNumber || !expirationDate) {
       return NextResponse.json(
@@ -85,6 +98,7 @@ export async function PATCH(request) {
         checkoutMethods: {
           update: {
             where: {
+              // @ts-ignore
               clientId: userId,
             },
             data: {
@@ -113,11 +127,11 @@ export async function PATCH(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     return NextResponse.json({ user: updatedUser });
   } catch (error) {
-    console.error(error);
+    console.error(error); // Log the error
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -125,10 +139,16 @@ export async function PATCH(request) {
   }
 }
 
+/**
+ * Handles DELETE requests to delete the checkout details of the authenticated user.
+ *
+ * @param {Request} request - The incoming DELETE request.
+ * @returns {Promise<NextResponse>} - The response containing the updated user data or an error message.
+ */
 export async function DELETE(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -143,7 +163,8 @@ export async function DELETE(request) {
       },
       data: {
         checkoutMethods: {
-          delete: true,
+          // @ts-ignore
+          delete: true, // Delete the checkout methods
         },
       },
       select: {
@@ -155,11 +176,11 @@ export async function DELETE(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     return NextResponse.json({ user: deletedUser });
   } catch (error) {
-    console.error(error);
+    console.error(error); // Log the error
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -167,10 +188,16 @@ export async function DELETE(request) {
   }
 }
 
+/**
+ * Handles POST requests to add new checkout details for the authenticated user.
+ *
+ * @param {Request} request - The incoming POST request.
+ * @returns {Promise<NextResponse>} - The response containing the new payment method data or an error message.
+ */
 export async function POST(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -180,7 +207,7 @@ export async function POST(request) {
     }
 
     const { cardType, cardHolderName, cardNumber, expirationDate } =
-      await request.json();
+      await request.json(); // Parse request body
 
     if (!cardType || !cardHolderName || !cardNumber || !expirationDate) {
       return NextResponse.json(
@@ -189,6 +216,7 @@ export async function POST(request) {
       );
     }
 
+    // Check if user already has a payment method
     const user = await prisma.client.findUnique({
       where: {
         id: userId,
@@ -226,11 +254,11 @@ export async function POST(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     return NextResponse.json({ paymentMethod: newPaymentMethod });
   } catch (error) {
-    console.error(error);
+    console.error(error); // Log the error
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

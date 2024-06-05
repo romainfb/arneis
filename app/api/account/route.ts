@@ -2,14 +2,21 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "../../../prisma/generated/client";
 import { auth } from "../../auth";
 
+// Initialize Prisma client
 const prisma = new PrismaClient();
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Handles GET requests to fetch account details of the authenticated user.
+ *
+ * @param {Request} request - The incoming GET request.
+ * @returns {Promise<NextResponse>} - The response containing the user data or an error message.
+ */
 export async function GET(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -31,7 +38,7 @@ export async function GET(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -47,10 +54,16 @@ export async function GET(request) {
   }
 }
 
+/**
+ * Handles PATCH requests to update account details of the authenticated user.
+ *
+ * @param {Request} request - The incoming PATCH request.
+ * @returns {Promise<NextResponse>} - The response containing the updated user data or an error message.
+ */
 export async function PATCH(request) {
   try {
-    const session = await auth();
-    const userId = parseInt(session?.user?.id);
+    const session = await auth(); // Authenticate the user and get session
+    const userId = parseInt(session?.user?.id); // Parse user ID from session
 
     if (!userId) {
       return NextResponse.json(
@@ -59,7 +72,7 @@ export async function PATCH(request) {
       );
     }
 
-    const { email, address, city, firstName, lastName } = await request.json();
+    const { email, address, city, firstName, lastName } = await request.json(); // Parse request body
 
     if (!email || !address || !city || !firstName || !lastName) {
       return NextResponse.json(
@@ -68,6 +81,7 @@ export async function PATCH(request) {
       );
     }
 
+    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -96,7 +110,7 @@ export async function PATCH(request) {
       },
     });
 
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // Disconnect Prisma client
 
     return NextResponse.json({ user: updatedUser });
   } catch (error) {

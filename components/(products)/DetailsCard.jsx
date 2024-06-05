@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 import { useCart } from "../(provider)/cartProvider";
 
 const DetaildCard = ({ product, categoryName, materials }) => {
-  const { addToCart } = useCart(); // Utilisez le hook useCart pour accéder à addToCart
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart(product); // Appel de la fonction addToCart avec le produit en tant que paramètre
+    addToCart(product);
     toast.success("Produit ajouté au panier avec succès!");
   };
 
