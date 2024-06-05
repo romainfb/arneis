@@ -13,7 +13,6 @@ export default function CategoryPageDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Extract the category ID from the URL pathname
   const params = useParams();
 
   const id = params.id;
@@ -35,7 +34,6 @@ export default function CategoryPageDetails() {
       })
       .catch((error) => setError(error.message));
 
-    // Fetch products for the category
     fetch(`/api/products?category=${id}`)
       .then((response) => response.json())
       .then((data) => {

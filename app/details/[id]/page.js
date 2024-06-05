@@ -48,13 +48,13 @@ async function fetchProductDetails(id) {
 
 export default function ProductDetails() {
   const pathname = usePathname();
-  const id = pathname.split("/").pop(); // Extraction de l'ID à partir du chemin
+  const id = pathname.split("/").pop();
   const [productDetails, setProductDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) return; // Attendre que l'ID soit disponible
+    if (!id) return;
 
     const fetchData = async () => {
       try {
